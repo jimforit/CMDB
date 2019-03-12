@@ -20,11 +20,18 @@ def dashboard(request):
     unknown = models.Asset.objects.filter(status=2).count()
     breakdown = models.Asset.objects.filter(status=3).count()
     backup = models.Asset.objects.filter(status=4).count()
-    up_rate = round(upline/total*100)
-    o_rate = round(offline/total*100)
-    un_rate = round(unknown/total*100)
-    bd_rate = round(breakdown/total*100)
-    bu_rate = round(backup/total*100)
+    if total>0:
+        up_rate = round(upline/total*100)
+        o_rate = round(offline/total*100)
+        un_rate = round(unknown/total*100)
+        bd_rate = round(breakdown/total*100)
+        bu_rate = round(backup/total*100)
+    else:
+        up_rate = 0
+        o_rate = 0
+        un_rate = 0
+        bd_rate = 0
+        bu_rate = 0
     server_number = models.Server.objects.count()
     networkdevice_number = models.NetworkDevice.objects.count()
     storagedevice_number = models.StorageDevice.objects.count()
